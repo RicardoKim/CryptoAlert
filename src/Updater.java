@@ -17,7 +17,7 @@ public class Updater implements Runnable{
 			try {
 				cryptoPrice.updatePrice();
 				try {
-					Thread.sleep(interval * 10);
+					Thread.sleep(interval * 1000);
 				} catch (InterruptedException e) {
 					continue;
 				}

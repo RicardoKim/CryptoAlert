@@ -10,28 +10,32 @@ public class TermProject
     public static void main(String args[]) throws IOException, JSONException
     {
     	
-        UserGUI usrGui = new UserGUI();
-        while(true) {
-        	UserID = usrGui.getUserID();
-        	if(UserID != null) {
-        		break;
-        	}
-        }
-  
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
-		CryptoPrice cryptoManager = new CryptoPrice(usrGui.getRatio());
-		
-		Updater updater = new Updater(cryptoManager, usrGui.getInterval());
-
-		Watcher watcher = new Watcher(cryptoManager);
-	
-		
-		executor.execute(updater);
-		executor.execute(watcher);
-
-		
-		executor.shutdown();
+//        UserGUI usrGui = new UserGUI();
+//        while(true) {
+//        	UserID = usrGui.getUserID();
+//        	if(UserID != null) {
+//        		break;
+//        	}
+//        }
+//  
+//        ExecutorService executor = Executors.newFixedThreadPool(2);
+//
+//		CryptoPrice cryptoManager = new CryptoPrice(usrGui.getRatio());
+//		
+//		Updater updater = new Updater(cryptoManager, usrGui.getInterval());
+//
+//		Watcher watcher = new Watcher(cryptoManager);
+//	
+//		
+//		executor.execute(updater);
+//		executor.execute(watcher);
+//
+//		
+//		executor.shutdown();
+//    	SendingKakaoMessage sendingMessage = new SendingKakaoMessage();
+//    	sendingMessage.sendingMessage();
+    	GetToken tokenMaker = new GetToken();
+    	tokenMaker.RecieveToken();
     }
     
     
