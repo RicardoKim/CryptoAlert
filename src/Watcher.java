@@ -1,3 +1,4 @@
+import java.io.IOException;
 
 public class Watcher implements Runnable{
 	public CryptoPrice cryptoPrice = null;
@@ -10,7 +11,12 @@ public class Watcher implements Runnable{
 	public void run() {
 		
 		while(true) {
-			cryptoPrice.conditionDetect();
+			try {
+				cryptoPrice.conditionDetect();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {

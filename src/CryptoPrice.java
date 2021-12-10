@@ -9,26 +9,29 @@ import org.json.JSONException;
 
 public class CryptoPrice {
 	LinkedList<Double> priceLinkedList = new LinkedList<Double>();
+	SendingKakaoMessage sendingMessage = new SendingKakaoMessage();
+	
 	private static Lock lock = new ReentrantLock();
 	Integer linkedListMaxSize = 10;
 	Double alertRatio = 0.0;
-	
+	String currentTime = "";
 	public CryptoPrice(Double ratio) {
 		alertRatio = ratio;
 	}
 	
-	public void updatePrice() throws IOException, JSONException {
+	public void updatePrice(Integer UserInterval) throws IOException, JSONException, InterruptedException {
 
 		GetCurrentPrice getPrice = new GetCurrentPrice();
 		
         HashMap<String, Double> coinInfo = getPrice.getCoinPrice();
         Object Time = coinInfo.keySet().toArray()[0];
         Double coinPrice = coinInfo.get(Time);
-        
+        currentTime = Time.toString();
         lock.lock();
         if(priceLinkedList.size() == linkedListMaxSize) {
         	priceLinkedList.removeLast();
         	priceLinkedList.add(coinPrice);
+        	Thread.sleep(1000*UserInterval);
         }
         else {
   
@@ -37,7 +40,7 @@ public class CryptoPrice {
         lock.unlock();
 	}
 	
-	public void conditionDetect() {
+	public void conditionDetect() throws IOException {
 		
 	
 		Double currentRatio = 0.0;
@@ -50,9 +53,9 @@ public class CryptoPrice {
 			currentRatio = (firstValue - lastValue)/lastValue * 100;
 			
 			
-			if(currentRatio > 0.1) {
-				
-				System.out.println("Alert!!!!");
+			if(currentRatio > alertRatio) {
+				sendingMessage.sendingMessage(currentTime, firstValue);
+				priceLinkedList.clear();
 			}
 		}
 

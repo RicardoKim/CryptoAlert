@@ -15,7 +15,7 @@ public class Updater implements Runnable{
 		
 		while(true) {
 			try {
-				cryptoPrice.updatePrice();
+				cryptoPrice.updatePrice(interval);
 				try {
 					Thread.sleep(interval * 1000);
 				} catch (InterruptedException e) {
@@ -25,6 +25,9 @@ public class Updater implements Runnable{
 				continue;
 			} catch (JSONException e) {
 				continue;
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 			
 		}

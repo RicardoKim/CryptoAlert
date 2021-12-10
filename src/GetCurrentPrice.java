@@ -36,7 +36,7 @@ public class GetCurrentPrice {
 	      Double price = (Double) outputJson.getJSONObject("bpi").getJSONObject("USD").get("rate_float");
 	      
 	      Date currentRawTime = new Date(System.currentTimeMillis());
-	      SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy  MM dd  HH  mm ss"); 
+	      SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy년 MM월 dd일  HH시  mm분 ss초"); 
 	      String timeNow = timeFormat.format(currentRawTime);
 	      
 	      HashMap<String, Double> output = new HashMap<String, Double>();

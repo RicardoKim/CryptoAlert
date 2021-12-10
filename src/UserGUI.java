@@ -22,21 +22,23 @@ public class UserGUI extends Frame implements ActionListener
 	public void actionPerformed(ActionEvent actionEvent)
     {
         if (actionEvent.getSource() == submitButton) {
-            UserId = IDTextfield.getText(); 
             optionSelect = cryptoInterval.getSelectedItem();
-            if(optionSelect == "1분") {
+            if(optionSelect == "1초") {
             	Interval = 1;
             }
-            else if(optionSelect == "5분") {
+            else if(optionSelect == "30초") {
             	Interval = 5;
             }
-            else if(optionSelect == "10분") {
-            	Interval = 10;
+            else if(optionSelect == "1분") {
+            	Interval = 60;
             }
             
             optionSelect = cryptoRatio.getSelectedItem();
             if(optionSelect == "0.1%") {
             	Ratio = 0.1;
+            }
+            else if(optionSelect == "0.01%") {
+            	Ratio = 0.01;
             }
             else if(optionSelect == "0.5%") {
             	Ratio = 0.5;
@@ -48,9 +50,6 @@ public class UserGUI extends Frame implements ActionListener
         }
     }
 	
-	public String getUserID() {
-		return UserId;
-	}
 	
 	public Integer getInterval(){
 		return Interval;
@@ -62,22 +61,19 @@ public class UserGUI extends Frame implements ActionListener
 	
     public UserGUI()
     {
-        super("사용자 정보 입력 창");
+        super("알람 조건 입력 창");
         
         
         
         // 콤보 박스 아이템 생성
+        cryptoInterval.addItem("1초");
+        cryptoInterval.addItem("30초");
         cryptoInterval.addItem("1분");
-        cryptoInterval.addItem("5분");
-        cryptoInterval.addItem("10분");
         
+        cryptoRatio.addItem("0.01%");
         cryptoRatio.addItem("0.1%");
         cryptoRatio.addItem("0.5%");
         cryptoRatio.addItem("1%");
- 
-        p.add(KakaoID);
-        p.add(IDTextfield);
-        
         p.add(cryptoIntervalText);
         p.add(cryptoInterval);
         p.add(cryptoRatioText);
